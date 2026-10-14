@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: course-registration
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:courses;DB_CLOSE_DELAY=-1;MODE=MySQL}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: ${H2_CONSOLE:true}
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    # Dev-only default. Set JWT_SECRET (base64, 256-bit or longer) in any real environment.
+    secret: ${JWT_SECRET:ZGV2LW9ubHktc2VjcmV0LWNoYW5nZS1tZS1pbi1wcm9kdWN0aW9uLTEyMzQ1Njc4OTA=}
+    ttl-minutes: ${JWT_TTL_MINUTES:120}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
+  enrollment:
+    max-credits: 18
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
